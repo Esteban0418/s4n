@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-import { Grid } from '@material-ui/core';
+import { Divider, Grid } from '@material-ui/core';
 import Message from '../../atoms/Message/Message'
 import Form from '../../molecules/Form/Form';
+import SearchForm from '../../molecules/SearchForm/SearchForm';
 
 class App extends React.Component{
 	constructor(props) {
@@ -19,19 +20,28 @@ class App extends React.Component{
 
 	render(){
 		let { wasUserAdded } = this.state;
+
 		return (
-			<Grid
-				container
-				direction="row"
-				justify="center"
-				alignItems="center"
-				className="App"
-			>
-				{ wasUserAdded && <Message /> }
-				<Form showMessage={this.showMessage} />
+			<Grid container spacing={4} alignContent="stretch">
+				<Grid
+					item
+					xs={12}
+					className="App"
+				>
+					{ wasUserAdded && <Message /> }
+					<Form showMessage={this.showMessage} />
+				</Grid>
+				<Divider variant="fullWidth" />
+				<Grid
+					item
+					xs={12}
+					className="App"
+				>
+					<SearchForm />
+				</Grid>
 			</Grid>
 		);
-		}
+	}
 }
 
 export default App;

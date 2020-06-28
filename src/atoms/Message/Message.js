@@ -2,13 +2,12 @@ import React from 'react';
 
 const Message = () => {
 
-    function getCookieValue(a) {
-        var b = document.cookie.match('(^|;)\\s*' + a + '\\s*=\\s*([^;]+)');
-        return b ? b.pop() : '';
+    function getCookieValue(cookieName) {
+        var cookieData = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
+        return cookieData ? cookieData.pop() : '';
     }
 
     let cookieInfo = JSON.parse(getCookieValue('user'));
-    console.log(cookieInfo);
 
     return (
         <div>
