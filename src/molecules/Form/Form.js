@@ -10,8 +10,9 @@ class Form extends React.Component {
             name: '',
             id: '',
             email: '',
-            date: null
+            birthDate: null
         };
+        
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -22,9 +23,10 @@ class Form extends React.Component {
     
     handleSubmit(event) {
         event.preventDefault();
-        let {name, lastName, id, date, email} = this.state;
-        date = date ? date.format('DD/MM/yyyy') : '';
-        document.cookie = 'user=' + JSON.stringify({name, lastName, id, date, email});
+        let {name, lastName, id, birthDate, email} = this.state;
+        birthDate = birthDate ? birthDate.format('DD/MM/yyyy') : '';
+        document.cookie = 'user=' + JSON.stringify({name, lastName, id, birthDate, email});
+        this.props.showMessage();
     }
     
     render() {
@@ -37,10 +39,10 @@ class Form extends React.Component {
                         disableFuture
                         openTo='year'
                         format='DD/MM/yyyy'
-                        label='Date of birth'
+                        label='Date of Birth'
                         views={['year', 'month', 'date']}
-                        value={this.state.date}
-                        onChange={date => this.setState({date})}
+                        value={this.state.birthDate}
+                        onChange={birthDate => this.setState({birthDate})}
                     />
                 </MuiPickersUtilsProvider>
                 <TextField name='email' label='E-mail' onChange={this.handleChange}/>
