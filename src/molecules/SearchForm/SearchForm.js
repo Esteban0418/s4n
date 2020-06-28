@@ -12,7 +12,7 @@ class SearchForm extends React.Component {
             search: '',
             repositories: [],
             tableData: [],
-            filteredTableData: null
+            filteredTableData: null,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -33,7 +33,7 @@ class SearchForm extends React.Component {
 
     handleFilterChange(e) {
         const filteredTableData = this.state.tableData.filter( (repo) => repo.name.indexOf(e.target.value) > -1 );
-        this.setState({filteredTableData})
+        this.setState({filteredTableData, [e.target.name] : e.target.value})
     }
 
     handleSubmit(e) {
@@ -83,6 +83,7 @@ class SearchForm extends React.Component {
                     ]}
                     data={filteredTableData || tableData}
                     options={{
+                        search: false,
                         paging: this.displayPagination(tableData, filteredTableData)
                     }}
                 />
