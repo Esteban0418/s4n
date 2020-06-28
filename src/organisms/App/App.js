@@ -22,10 +22,11 @@ class App extends React.Component{
 		let { wasUserAdded } = this.state;
 
 		return (
-			<Grid container spacing={4} alignContent="stretch">
+			<Grid container spacing={4} justify="center">
 				<Grid
 					item
 					xs={12}
+					lg={4}
 					className="App"
 				>
 					{ wasUserAdded && <Message /> }

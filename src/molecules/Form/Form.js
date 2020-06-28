@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
+import "./Form.scss"
 class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -31,29 +32,49 @@ class Form extends React.Component {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <TextField name='name' label='Full Name' onChange={this.handleChange} />
-                <TextField name='id' label='ID Number' onChange={this.handleChange}/>
-                <MuiPickersUtilsProvider utils={MomentUtils}>
-                    <DatePicker
-                        disableFuture
-                        openTo='year'
-                        format='DD/MM/yyyy'
-                        label='Date of Birth'
-                        views={['year', 'month', 'date']}
-                        value={this.state.birthDate}
-                        onChange={birthDate => this.setState({birthDate})}
-                    />
-                </MuiPickersUtilsProvider>
-                <TextField name='email' label='E-mail' onChange={this.handleChange}/>
-                <Button
-                    variant='contained'
-                    color='primary'
-                    size='small'
-                    type='submit'
-                >
-                    Save Candidate
-                </Button>
+            <form onSubmit={this.handleSubmit} className="form">
+                <Grid container spacing={4}>
+                    <Grid item xs={12}>
+                        <h1 className="form__header">Candidate Registration</h1>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField fullWidth name='name' label='Full Name' onChange={this.handleChange} />
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                        <TextField fullWidth name='id' label='ID Number' onChange={this.handleChange}/>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                        <TextField fullWidth name='userName' label='Github Username' onChange={this.handleChange}/>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                        <MuiPickersUtilsProvider utils={MomentUtils}>
+                            <DatePicker
+                                fullWidth
+                                disableFuture
+                                openTo='year'
+                                format='DD/MM/yyyy'
+                                label='Date of Birth'
+                                views={['year', 'month', 'date']}
+                                value={this.state.birthDate}
+                                onChange={birthDate => this.setState({birthDate})}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </Grid>
+                    <Grid item xs={12} lg={6}>
+                        <TextField fullWidth name='email' label='E-mail' onChange={this.handleChange}/>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            variant='contained'
+                            color='primary'
+                            size='small'
+                            type='submit'
+                            className="form__button"
+                        >
+                            Save Candidate
+                        </Button>
+                    </Grid>
+                </Grid>
             </form>
         );
     }

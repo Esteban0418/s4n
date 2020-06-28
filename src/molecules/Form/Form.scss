@@ -1,0 +1,13 @@
+.form{
+    border: thin solid gray;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 20px;
+    text-align: center;
+    &__header{
+        margin-bottom: 0;
+    }
+    &__button{
+        text-align: left;
+    }
+}
