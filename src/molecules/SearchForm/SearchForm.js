@@ -11,11 +11,14 @@ class SearchForm extends React.Component {
             isUserFound: true,
             search: '',
             repositories: [],
-            tableData: []
+            tableData: [],
+            filteredTableData: null
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleFilterChange = this.handleFilterChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        //this.displayPagination = this.displayPagination.bind(this);
     }
 
     setTableData(repositories) {
@@ -28,6 +31,11 @@ class SearchForm extends React.Component {
         this.setState({ [e.target.name] : e.target.value });
     }
 
+    handleFilterChange(e) {
+        const filteredTableData = this.state.tableData.filter( (repo) => repo.name.indexOf(e.target.value) > -1 );
+        this.setState({filteredTableData})
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         axios.get(`https://api.github.com/users/${this.state.search}/repos`)
@@ -38,10 +46,18 @@ class SearchForm extends React.Component {
                     isUserFound: true
                 });
                 
-            }, () => this.setState({ isUserFound: false}))
+            }, () => this.setState({ isUserFound: false }))
+    }
+
+    displayPagination(tableData, filteredTableData) {
+        if(filteredTableData) {
+            return filteredTableData.length > 5
+        }
+        return tableData.length > 5
     }
 
     render() {
+        let {tableData,filteredTableData} = this.state;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -55,7 +71,9 @@ class SearchForm extends React.Component {
                         Search
                     </Button>
                 </form>
+                <TextField name='filter' label='Filter by Name' onChange={this.handleFilterChange}/>
                 <MaterialTable
+                    title="User Repositories"
                     columns={[
                         { title: 'Language', field: 'language' },
                         { title: 'Default Branch', field: 'default_branch' },
@@ -63,8 +81,10 @@ class SearchForm extends React.Component {
                         { title: 'Name', field: 'name' },
                         { title: 'Description', field: 'description' }
                     ]}
-                    data={this.state.tableData}
-                    title="User Repositories"
+                    data={filteredTableData || tableData}
+                    options={{
+                        paging: this.displayPagination(tableData, filteredTableData)
+                    }}
                 />
                 { !this.state.isUserFound && <p>User has not been found</p>}
             </div>
