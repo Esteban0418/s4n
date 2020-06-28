@@ -1,0 +1,13 @@
+.app {
+    background: rgb(0,12,153);
+    background: linear-gradient(25deg, rgba(0,12,153,1) 0%, rgba(0,96,186,1) 50%, rgba(0,218,177,1) 100%);
+} 
+
+.divider.thick {
+    background: white;
+    border-radius: 10px;
+    height: 5px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 70%;
+}

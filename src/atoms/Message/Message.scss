@@ -1,0 +1,10 @@
+.message {
+    background-color: white;
+    border: thin solid darkgreen;
+    border-radius: 10px;
+    color: black;
+    padding: 20px;
+    &__header{
+        font-size: 20px;
+    }
+}
