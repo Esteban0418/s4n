@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
-import axios from 'axios';
 import MaterialTable from 'material-table';
+import GitServices from '../../services/gitServices'
 
 import './SearchForm.scss';
 
@@ -68,12 +68,9 @@ class SearchForm extends React.Component {
     */
     handleSubmit(e) {
         e.preventDefault();
-        axios.get(`https://api.github.com/users/${this.state.searchTerm}/repos`)
-            .then(res => {
-                const repositories = res.data;
+        GitServices.getRepositories(this.state.searchTerm).then(repositories => {
                 this.setState({ tableData: this.setTableData(repositories) });
-                
-            }, () => this.setState({ tableData: [] }))
+        }, () => this.setState({ tableData: [] }))
     }
 
     /**

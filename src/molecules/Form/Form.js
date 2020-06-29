@@ -55,7 +55,7 @@ class Form extends React.Component {
                         <TextField required fullWidth name='name' label='Full Name' onChange={this.handleChange} />
                     </Grid>
                     <Grid item xs={12} lg={6}>
-                        <TextField required fullWidth name='id' label='ID Number' onChange={this.handleChange}/>
+                        <TextField fullWidth name='id' label='ID Number' onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={12} lg={6}>
                         <TextField required fullWidth name='userName' label='Github Username' onChange={this.handleChange}/>
@@ -63,7 +63,6 @@ class Form extends React.Component {
                     <Grid item xs={12} lg={6}>
                         <MuiPickersUtilsProvider utils={MomentUtils}>
                             <DatePicker
-                                required
                                 fullWidth
                                 disableFuture
                                 openTo='year'
