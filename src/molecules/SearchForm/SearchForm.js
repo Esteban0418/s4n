@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import axios from 'axios';
 import MaterialTable from 'material-table';
+
+import './SearchForm.scss';
 
 
 class SearchForm extends React.Component {
@@ -59,36 +61,58 @@ class SearchForm extends React.Component {
     render() {
         let {tableData,filteredTableData} = this.state;
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <TextField name='search' label='Search User' onChange={this.handleChange}/>
-                    <Button
-                        variant='contained'
-                        color='secondary'
-                        size='small'
-                        type='submit'
-                    >
-                        Search
-                    </Button>
-                </form>
-                <TextField name='filter' label='Filter by Name' onChange={this.handleFilterChange}/>
-                <MaterialTable
-                    title="User Repositories"
-                    columns={[
-                        { title: 'Language', field: 'language' },
-                        { title: 'Default Branch', field: 'default_branch' },
-                        { title: 'URL', field: 'html_url' },
-                        { title: 'Name', field: 'name' },
-                        { title: 'Description', field: 'description' }
-                    ]}
-                    data={filteredTableData || tableData}
-                    options={{
-                        search: false,
-                        paging: this.displayPagination(tableData, filteredTableData)
-                    }}
-                />
+            <>
+                <Grid container spacing={4}  justify='center' >
+                    <Grid item xs={12} md={6} lg={4}>
+                        <form onSubmit={this.handleSubmit} className='searchForm'>
+                            <TextField 
+                                name='search' 
+                                label='Search User' 
+                                variant='outlined' 
+                                fullWidth
+                                onChange={this.handleChange} 
+                                className='searchForm__textField'/>
+                            <Button
+                                variant='contained'
+                                color='primary'
+                                size='small'
+                                type='submit'
+                                className='searchForm__button compact'
+                            >
+                                Search
+                            </Button>
+                        </form>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={4}  justify='center' >
+                    <Grid item xs={12} lg={10}>
+                        <div className='filter__container'>
+                            <TextField 
+                                name='filter' 
+                                label='Filter by Name'
+                                onChange={this.handleFilterChange}
+                                className='filter__container--input'
+                            />
+                        </div>
+                        <MaterialTable
+                            title='User Repositories'
+                            columns={[
+                                { title: 'Language', field: 'language' },
+                                { title: 'Default Branch', field: 'default_branch' },
+                                { title: 'URL', field: 'html_url' },
+                                { title: 'Name', field: 'name' },
+                                { title: 'Description', field: 'description', cellStyle: { width: 90, maxWidth: 90 } }
+                            ]}
+                            data={filteredTableData || tableData}
+                            options={{
+                                search: false,
+                                paging: this.displayPagination(tableData, filteredTableData)
+                            }}
+                        />
+                    </Grid>
+                </Grid>
                 { !this.state.isUserFound && <p>User has not been found</p>}
-            </div>
+            </>
         );
     }
 }

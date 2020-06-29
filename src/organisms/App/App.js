@@ -23,14 +23,14 @@ class App extends React.Component{
 
 		return (
 			<Grid container spacing={4} justify="center" className="app">
+				<Grid item xs={12} md={6} lg={4}>
+					<Form showMessage={this.showMessage} />
+				</Grid>
 				{ wasUserAdded && 
 					<Grid item xs={12} lg={2}>
 						<Message /> 
 					</Grid>
 				}
-				<Grid item xs={12} md={6} lg={4}>
-					<Form showMessage={this.showMessage} />
-				</Grid>
 				<Divider variant="middle" className="divider thick"/>
 				<Grid item xs={12}>
 					<SearchForm />

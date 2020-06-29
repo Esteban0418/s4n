@@ -4,7 +4,13 @@
     border-radius: 10px;
     color: black;
     padding: 20px;
-    &__header{
-        font-size: 20px;
+    &__header {
+        font-size: 16px;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+    &__paragraph {
+        font-size: 14px;
     }
 }

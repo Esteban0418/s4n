@@ -69,7 +69,7 @@ class Form extends React.Component {
                             color='primary'
                             size='small'
                             type='submit'
-                            className="form__button"
+                            className='form__button'
                         >
                             Save Candidate
                         </Button>
