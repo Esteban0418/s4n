@@ -10,7 +10,6 @@ class SearchForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isUserFound: true,
             search: '',
             repositories: [],
             tableData: [],
@@ -47,12 +46,9 @@ class SearchForm extends React.Component {
         axios.get(`https://api.github.com/users/${this.state.search}/repos`)
             .then(res => {
                 const repositories = res.data;
-                this.setState({ 
-                    tableData: this.setTableData(repositories), 
-                    isUserFound: true
-                });
+                this.setState({ tableData: this.setTableData(repositories) });
                 
-            }, () => this.setState({ isUserFound: false }))
+            }, () => this.setState({ tableData: [] }))
     }
 
     displayPagination(tableData, filteredTableData) {
@@ -115,7 +111,6 @@ class SearchForm extends React.Component {
                         />
                     </Grid>
                 </Grid>
-                { !this.state.isUserFound && <p>User has not been found</p>}
             </>
         );
     }
