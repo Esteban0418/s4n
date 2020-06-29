@@ -18,6 +18,7 @@ const Message = () => {
                 <p className='message__paragraph'><b>ID Number:</b> {cookieInfo.id}</p>
                 <p className='message__paragraph'><b>Date of Birth:</b> {cookieInfo.birthDate}</p>
                 <p className='message__paragraph'><b>E-mail:</b> {cookieInfo.email}</p>
+                <p className='message__paragraph'><b>Github Username:</b> {cookieInfo.userName}</p>
             </div>
         </div>
     );

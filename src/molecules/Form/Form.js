@@ -11,7 +11,8 @@ class Form extends React.Component {
             name: '',
             id: '',
             email: '',
-            birthDate: null
+            birthDate: null,
+            userName: ''
         };
         
         this.handleChange = this.handleChange.bind(this);
@@ -24,9 +25,9 @@ class Form extends React.Component {
     
     handleSubmit(e) {
         e.preventDefault();
-        let {name, lastName, id, birthDate, email} = this.state;
+        let {name, id, birthDate, email, userName} = this.state;
         birthDate = birthDate ? birthDate.format('DD/MM/yyyy') : '';
-        document.cookie = 'user=' + JSON.stringify({name, lastName, id, birthDate, email});
+        document.cookie = 'user=' + JSON.stringify({name, id, birthDate, email, userName});
         this.props.showMessage();
     }
     
@@ -38,17 +39,18 @@ class Form extends React.Component {
                         <h1 className='form__header'>Candidate Registration</h1>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth name='name' label='Full Name' onChange={this.handleChange} />
+                        <TextField required fullWidth name='name' label='Full Name' onChange={this.handleChange} />
                     </Grid>
                     <Grid item xs={12} lg={6}>
-                        <TextField fullWidth name='id' label='ID Number' onChange={this.handleChange}/>
+                        <TextField required fullWidth name='id' label='ID Number' onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={12} lg={6}>
-                        <TextField fullWidth name='userName' label='Github Username' onChange={this.handleChange}/>
+                        <TextField required fullWidth name='userName' label='Github Username' onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={12} lg={6}>
                         <MuiPickersUtilsProvider utils={MomentUtils}>
                             <DatePicker
+                                required
                                 fullWidth
                                 disableFuture
                                 openTo='year'
@@ -61,7 +63,7 @@ class Form extends React.Component {
                         </MuiPickersUtilsProvider>
                     </Grid>
                     <Grid item xs={12} lg={6}>
-                        <TextField fullWidth name='email' label='E-mail' onChange={this.handleChange}/>
+                        <TextField required fullWidth name='email' label='E-mail' onChange={this.handleChange}/>
                     </Grid>
                     <Grid item xs={12}>
                         <Button
