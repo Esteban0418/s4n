@@ -3,7 +3,7 @@ import { Button, Grid, TextField } from '@material-ui/core';
 import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
-import "./Form.scss"
+import './Form.scss';
 class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -22,8 +22,8 @@ class Form extends React.Component {
         this.setState({ [e.target.name] : e.target.value });
     }
     
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit(e) {
+        e.preventDefault();
         let {name, lastName, id, birthDate, email} = this.state;
         birthDate = birthDate ? birthDate.format('DD/MM/yyyy') : '';
         document.cookie = 'user=' + JSON.stringify({name, lastName, id, birthDate, email});
@@ -32,10 +32,10 @@ class Form extends React.Component {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="form">
+            <form onSubmit={this.handleSubmit} className='form'>
                 <Grid container spacing={4}>
                     <Grid item xs={12}>
-                        <h1 className="form__header">Candidate Registration</h1>
+                        <h1 className='form__header'>Candidate Registration</h1>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField fullWidth name='name' label='Full Name' onChange={this.handleChange} />

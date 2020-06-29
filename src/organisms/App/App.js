@@ -22,7 +22,7 @@ class App extends React.Component{
 		let { wasUserAdded } = this.state;
 
 		return (
-			<Grid container spacing={4} justify="center" className="app">
+			<Grid container spacing={4} justify='center' className='app'>
 				<Grid item xs={12} md={6} lg={4}>
 					<Form showMessage={this.showMessage} />
 				</Grid>
@@ -31,7 +31,7 @@ class App extends React.Component{
 						<Message /> 
 					</Grid>
 				}
-				<Divider variant="middle" className="divider thick"/>
+				<Divider variant='middle' className='divider thick'/>
 				<Grid item xs={12}>
 					<SearchForm />
 				</Grid>

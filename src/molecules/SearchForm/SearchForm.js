@@ -67,7 +67,7 @@ class SearchForm extends React.Component {
                         <form onSubmit={this.handleSubmit} className='searchForm'>
                             <TextField 
                                 name='search' 
-                                label='Search User' 
+                                label='Search Github Username' 
                                 variant='outlined' 
                                 fullWidth
                                 onChange={this.handleChange} 
