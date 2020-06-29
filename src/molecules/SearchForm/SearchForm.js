@@ -15,11 +15,9 @@ class SearchForm extends React.Component {
             tableData: [],
             filteredTableData: null,
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        //this.displayPagination = this.displayPagination.bind(this);
     }
 
     setTableData(repositories) {
