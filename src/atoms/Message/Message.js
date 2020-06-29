@@ -1,8 +1,16 @@
 import React from 'react';
 import './Message.scss';
 
+/**
+* Displays a Message box to show user details
+*/
 const Message = () => {
 
+    /**
+     * Returns specific cookie value
+     * @param  {String} arg Cookie name
+     * @return {String}  Cookie Value
+     */
     function getCookieValue(cookieName) {
         var cookieData = document.cookie.match('(^|;)\\s*' + cookieName + '\\s*=\\s*([^;]+)');
         return cookieData ? cookieData.pop() : '';

@@ -5,6 +5,10 @@ import Form from '../../molecules/Form/Form';
 import SearchForm from '../../molecules/SearchForm/SearchForm';
 
 import './App.scss';
+
+/**
+* Main component
+*/
 class App extends React.Component{
 	constructor(props) {
         super(props);
@@ -14,6 +18,9 @@ class App extends React.Component{
 		this.showMessage = this.showMessage.bind(this);
 	}
 	
+	/**
+    * Displays Message component after a user has been saved to a cookie
+    */
 	showMessage(){
 		this.setState({ wasUserAdded: true});
 	}

@@ -4,6 +4,10 @@ import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
 import './Form.scss';
+
+/**
+* Displays a Form to save user information
+*/
 class Form extends React.Component {
     constructor(props) {
         super(props);
@@ -19,10 +23,19 @@ class Form extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
+    /**
+    * Sets the state for the input that triggers this function
+    */
     handleChange(e) {
         this.setState({ [e.target.name] : e.target.value });
     }
     
+    /**
+    * Creates a cookie with current state values.
+    * Triggers Message component display.
+    * @param  {String} arg Cookie name
+    * @return {String}  Cookie Value
+    */
     handleSubmit(e) {
         e.preventDefault();
         let {name, id, birthDate, email, userName} = this.state;

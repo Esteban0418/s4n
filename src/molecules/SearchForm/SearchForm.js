@@ -5,12 +5,14 @@ import MaterialTable from 'material-table';
 
 import './SearchForm.scss';
 
-
+/**
+* Displays a searchbar and a sortable and filterable table
+*/
 class SearchForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            search: '',
+            searchTerm: '',
             repositories: [],
             tableData: [],
             filteredTableData: null,
@@ -20,16 +22,35 @@ class SearchForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    /**
+    * Maps list of repositories and return an array with repository information like language, default branch, url, name and description
+    * @param  {Array} repositories List of repositories
+    * @return {Array}  Returns list of repositories with specific data
+    */
     setTableData(repositories) {
-        return repositories.map( ({language, default_branch, html_url, name, description }) => {
-            return { language, default_branch, html_url, name, description }
-        })
+        return repositories.map( ({language, default_branch, html_url, name, description }) => (
+            { language, default_branch, html_url, name, description }
+        ))
     }
 
+    /**
+     * Sets the state for the input that triggers this function
+    * @param  {Event} e event
+     */
     handleChange(e) {
         this.setState({ [e.target.name] : e.target.value });
     }
 
+    /**
+     * Filters table rows.
+     * Gets user list of repositories when filter value is equal or grater than 3 characters,
+     * then it filters each repository name by transforming the name to lower case,
+     * and finally it compares if the filter value matches the repository name.
+     * returns the first 5 matches.
+     * 
+     * If filter values is shorter than 3 characters, it sets the filtered data to an empty array so it displays all repositories again.
+     * @param  {Event} e event
+     */
     handleFilterChange(e) {
         if(e.target.value.length >= 3) {
             const filteredTableData = this.state.tableData.filter( (repo) => repo.name.toLowerCase().indexOf(e.target.value) > -1 ).slice(0,5);
@@ -39,9 +60,15 @@ class SearchForm extends React.Component {
         }
     }
 
+    /**
+    * Gets all repositories from a specific user parses data to be used in table component.
+    * When user is not found, sets table data to an empty array
+    * @param  {Event} e event
+    * @return {Array}  Returns list of repositories with specific data
+    */
     handleSubmit(e) {
         e.preventDefault();
-        axios.get(`https://api.github.com/users/${this.state.search}/repos`)
+        axios.get(`https://api.github.com/users/${this.state.searchTerm}/repos`)
             .then(res => {
                 const repositories = res.data;
                 this.setState({ tableData: this.setTableData(repositories) });
@@ -49,6 +76,12 @@ class SearchForm extends React.Component {
             }, () => this.setState({ tableData: [] }))
     }
 
+    /**
+    * Returns a Boolean to determine if table pagination should be displayed
+    * @param  {Array} tableData Array of table row
+    * @param  {Array} filteredTableData Array of filtered table rows
+    * @return {Boolean}  Returns true if there are more than 5 table rows
+    */
     displayPagination(tableData, filteredTableData) {
         if(filteredTableData) {
             return filteredTableData.length > 5
@@ -64,7 +97,7 @@ class SearchForm extends React.Component {
                     <Grid item xs={12} md={6} lg={4}>
                         <form onSubmit={this.handleSubmit} className='searchForm'>
                             <TextField 
-                                name='search' 
+                                name='searchTerm' 
                                 label='Search Github Username' 
                                 variant='outlined' 
                                 fullWidth
