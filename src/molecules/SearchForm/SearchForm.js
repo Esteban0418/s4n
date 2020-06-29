@@ -34,7 +34,7 @@ class SearchForm extends React.Component {
 
     handleFilterChange(e) {
         if(e.target.value.length >= 3) {
-            const filteredTableData = this.state.tableData.filter( (repo) => repo.name.indexOf(e.target.value) > -1 );
+            const filteredTableData = this.state.tableData.filter( (repo) => repo.name.toLowerCase().indexOf(e.target.value) > -1 ).slice(0,5);
             this.setState({filteredTableData, [e.target.name] : e.target.value})
         }else {
             this.setState({filteredTableData: null})
